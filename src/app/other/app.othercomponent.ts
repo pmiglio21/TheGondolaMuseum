@@ -9,4 +9,10 @@ import { RouterOutlet, Router } from '@angular/router';
 })
 
 export class OtherComponent {
+
+  constructor(private router: Router) {}
+
+  goToMainRoute(){
+    this.router.navigate(['/main']); 
+  }
 }

@@ -51,6 +51,6 @@ export class MainComponent {
   }
 
   goToOtherRoute(){
-      this.router.navigate(['/other']);  // define your component where you want to go
+      this.router.navigate(['/other']);  
   }
 }
