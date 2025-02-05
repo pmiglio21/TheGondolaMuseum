@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +9,10 @@ import { RouterOutlet } from '@angular/router';
 })
 
 export class AppComponent {
+  constructor(private router: Router) {}
+
+  title = "The Gondola Museum"
+
   name = "Angular";
   @ViewChild("videoPlayer", { static: false }) videoplayer: ElementRef<any> = {} as ElementRef;
   isPlay: boolean = false;
@@ -44,5 +48,9 @@ export class AppComponent {
   restart() {
     let video: any = document.getElementById("my_video_1");
     video.currentTime = 0;
+  }
+
+  goToOtherRoute(){
+      this.router.navigate(['/other']);  // define your component where you want to go
   }
 }
