@@ -28,17 +28,12 @@ export class MainComponent {
   }
 
   setupDailyRandomVideo() {
-
-    console.log("made it into setupDailyRandomVideo")
-
     var randomVideoSource = this.doc.getElementById("random-video-source");  
 
     var randomIndex = this.getRandomInt()
     
     if (randomVideoSource != null)
     {
-      console.log("made it into null check")
-
       randomVideoSource.setAttribute("src", "assets/videos/"+randomIndex+".webm")
     }
 
@@ -87,7 +82,7 @@ export class MainComponent {
     video.currentTime = 0;
   }
 
-  goToOtherRoute(){
-      this.router.navigate(['/other']);  
+  goToRandomVideo(){
+      this.router.navigate(['/watch-video']);  
   }
 }

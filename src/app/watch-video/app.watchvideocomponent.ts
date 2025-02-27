@@ -4,11 +4,11 @@ import { RouterOutlet, Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
-  templateUrl: './app.othercomponent.html',
-  styleUrl: './app.othercomponent.css'
+  templateUrl: './app.watchvideocomponent.html',
+  styleUrl: './app.watchvideocomponent.css'
 })
 
-export class OtherComponent {
+export class WatchVideoComponent {
 
   constructor(private router: Router) {}
 

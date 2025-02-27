@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { OtherComponent } from './other/app.othercomponent';
+import { WatchVideoComponent } from './watch-video/app.watchvideocomponent';
 import { MainComponent } from './homepage/homepage';
 import { AppComponent } from './app.component';
 
 export const routes: Routes = [
     // { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: '', component:MainComponent },
-    { path: 'other', component:OtherComponent },
+    { path: 'watch-video', component:WatchVideoComponent },
 ];
 
 @NgModule({
