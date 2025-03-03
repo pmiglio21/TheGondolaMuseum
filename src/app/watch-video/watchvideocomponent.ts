@@ -4,8 +4,8 @@ import { RouterOutlet, Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
-  templateUrl: './app.watchvideocomponent.html',
-  styleUrl: './app.watchvideocomponent.css'
+  templateUrl: './watchvideocomponent.html',
+  styleUrl: './watchvideocomponent.css'
 })
 
 export class WatchVideoComponent {

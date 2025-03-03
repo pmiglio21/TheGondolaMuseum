@@ -5,8 +5,8 @@ import { DOCUMENT } from '@angular/common';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
-  templateUrl: './homepage.html',
-  styleUrl: './homepage.css'
+  templateUrl: './homepagecomponent.html',
+  styleUrl: './homepagecomponent.css'
 })
 
 export class MainComponent {
