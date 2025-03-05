@@ -9,11 +9,12 @@ import { DOCUMENT } from '@angular/common';
   styleUrl: './homepagecomponent.css'
 })
 
-export class MainComponent {
+export class HomePageComponent {
   private doc: Document;
   constructor(@Inject(DOCUMENT) doc: any, private router: Router) {
     this.doc = doc;
   }
+  
 
   title = "The Gondola Museum"
 
@@ -24,6 +25,9 @@ export class MainComponent {
   isPlay: boolean = false;
   
   ngOnInit() {
+    // this.doc.addEventListener('click', function(evt) {
+    //   console.log(evt.target);}, false);
+
     this.setupDailyRandomVideo();
   }
 
@@ -83,6 +87,8 @@ export class MainComponent {
   }
 
   goToRandomVideo(){
-      this.router.navigate(['/watch-video']);  
+      var randomIndex = this.getRandomInt()
+
+      this.router.navigate(['/watch-video', randomIndex]);  
   }
 }

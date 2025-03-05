@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { WatchVideoComponent } from './watch-video/app.watchvideocomponent';
-import { MainComponent } from './homepage/homepage';
+import { WatchVideoComponent } from './watch-video/watchvideocomponent';
+import { HomePageComponent } from './homepage/homepagecomponent';
 import { AppComponent } from './app.component';
+import { RenderMode } from '@angular/ssr';
 
 export const routes: Routes = [
-    // { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: '', component:MainComponent },
-    { path: 'watch-video', component:WatchVideoComponent },
+    { path: '', component:HomePageComponent },
+    { path: 'watch-video/:id', component:WatchVideoComponent , data: {renderMode: 'default'}},
+    // { path: 'watch-video', component:WatchVideoComponent }
 ];
 
 @NgModule({

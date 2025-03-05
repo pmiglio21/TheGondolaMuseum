@@ -1,26 +1,20 @@
-<script src="homepage.ts"></script>
+<script src="./homepagecomponent.ts"></script>
 
 <main class="main">
-  <!-- <app-navbar></app-navbar> -->
-  <head>
-    <nav>
-      <a href="">The Gondola Museum</a>
-      <ul>
-        <li><a href="watch-video">Random Video</a></li>
-        <li><a href="#">Search</a></li>
-        <li><a href="#">About</a></li>
-      </ul>
-    </nav>
-  </head>
+  <nav>
+    <a href="">The Gondola Museum</a>
+    <ul>
+      <li><button (click)="goToRandomVideo()">Random Video</button></li>
+      <li><a href="#">Search</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+  </nav>
   <div class="content">
-    <div id="video-display">
+    <!-- <div id="video-display">
       <video id="my_video_1" class="video-js vjs-default-skin" width="1280px" height="720px" controls preload="none"
         data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
         <source id="random-video-source" src="assets/videos/2.webm" type='video/webm' />
       </video>
-      <!-- <img ng-src="{{dailyRandomVideoSource}}" />  -->
-      <!-- assets/videos/2.webm -->
-      <!-- poster='http://video-js.zencoder.com/oceans-clip.jpg' -->
     </div>
     <div id="video-controls">
       <button (click)="playPause()">Play/Pause</button>
@@ -30,9 +24,7 @@
       <button (click)="restart();">Restart</button>
       <button (click)="skip(-10)">Rewind</button>
       <button (click)="skip(10)">Fastforward</button>
-    </div>
-
-    <button class="btn btn-primary" (click)="goToRandomVideo()">Go to Random Video</button>
+    </div> -->
   </div>
 </main>
 
