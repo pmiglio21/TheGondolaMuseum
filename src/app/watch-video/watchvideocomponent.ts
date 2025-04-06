@@ -26,6 +26,12 @@ export class WatchVideoComponent {
       this.activatedRoute.params.subscribe((params: Params) => this.videoId = params['id']);
 
       this.setupVideo();
+
+      // Automatically play the video when the route is loaded
+      const myVideo: HTMLVideoElement | null = this.doc.getElementById("my_video_1") as HTMLVideoElement;
+      if (myVideo) {
+        myVideo.play();
+      }
   }
 
   setupVideo() {
