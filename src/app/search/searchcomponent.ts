@@ -5,11 +5,11 @@ import { DOCUMENT } from '@angular/common';
 @Component({
   selector: 'watch-video',
   imports: [RouterOutlet],
-  templateUrl: './watchvideocomponent.html',
-  styleUrl: './watchvideocomponent.css'
+  templateUrl: './searchcomponent.html',
+  styleUrl: './searchcomponent.css'
 })
 
-export class WatchVideoComponent {
+export class SearchComponent {
   private doc: Document;
   constructor(@Inject(DOCUMENT) doc: any, private router: Router, private activatedRoute: ActivatedRoute) {
     this.doc = doc;
@@ -21,17 +21,7 @@ export class WatchVideoComponent {
   videoId: number = 0;
 
   ngOnInit() {
-    // window.location.reload();
 
-      this.activatedRoute.params.subscribe((params: Params) => this.videoId = params['id']);
-
-      this.setupVideo();
-
-      // Automatically play the video when the route is loaded
-      const myVideo: HTMLVideoElement | null = this.doc.getElementById("my_video_1") as HTMLVideoElement;
-      if (myVideo) {
-        myVideo.play();
-      }
   }
 
   setupVideo() {
@@ -53,10 +43,6 @@ export class WatchVideoComponent {
   }
 
   goToRandomVideo(){
-    // this.videoId = this.getRandomInt()
-
-    // this.setupVideo();
-
     var randomIndex = this.getRandomInt()
 
     this.router.navigate(['/watch-video', randomIndex]);  

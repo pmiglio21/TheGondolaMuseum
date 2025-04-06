@@ -91,4 +91,8 @@ export class HomePageComponent {
 
       this.router.navigate(['/watch-video', randomIndex]);  
   }
+
+  goToSearch(){
+    this.router.navigate(['/search']);  
+  }
 }
