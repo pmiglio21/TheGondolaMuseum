@@ -13,6 +13,9 @@ export class WatchVideoComponent {
   private doc: Document;
   constructor(@Inject(DOCUMENT) doc: any, private router: Router, private activatedRoute: ActivatedRoute) {
     this.doc = doc;
+
+    // force route reload whenever params change;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   videoId: number = 0;
