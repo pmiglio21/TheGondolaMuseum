@@ -1,9 +1,18 @@
 import { Component, ViewChild, ElementRef, Inject } from "@angular/core";
 import { ActivatedRoute, RouterOutlet, Router, Params } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
+import { WebApiService } from './../services/webapi.service'; // Adjusted the path
+// import { HttpClientModule } from "@angular/common/http";
+
+// @Component({
+//   selector: 'search',
+//   imports: [RouterOutlet, HttpClientModule],
+//   templateUrl: './searchcomponent.html',
+//   styleUrl: './searchcomponent.css'
+// })
 
 @Component({
-  selector: 'watch-video',
+  selector: 'search',
   imports: [RouterOutlet],
   templateUrl: './searchcomponent.html',
   styleUrl: './searchcomponent.css'
@@ -11,14 +20,21 @@ import { DOCUMENT } from '@angular/common';
 
 export class SearchComponent {
   private doc: Document;
-  constructor(@Inject(DOCUMENT) doc: any, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(@Inject(DOCUMENT) doc: any, private router: Router, private activatedRoute: ActivatedRoute, 
+                                          private webapiservice : WebApiService) {
     this.doc = doc;
 
     // force route reload whenever params change;
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+
+    webapiservice.getStringFromWebApi().subscribe((data: any) => {
+      console.log(data);
+    });
   }
 
   videoId: number = 0;
+
+  
 
   ngOnInit() {
 
