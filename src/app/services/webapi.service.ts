@@ -9,9 +9,15 @@ export class WebApiService
 {
     constructor(private http: HttpClient) {
         console.log('HttpClient is working!');
-      }
+    }
 
-    getStringFromWebApi() {
-        return this.http.get("https://localhost:7290/GondolaMuseum", { responseType: 'text' });
+    GetMultipleByTag() {
+        return this.http.get("https://localhost:7290/GondolaVideo/GetMultipleByTag", { responseType: 'text' });
+    }   
+
+    GetSingleByVideoId(videoId: number) {
+        const params = { videoId }; // Create query parameters
+
+        return this.http.get("https://localhost:7290/GondolaVideo/GetSingleByVideoId", { params, responseType: 'text' });
     }
 }
