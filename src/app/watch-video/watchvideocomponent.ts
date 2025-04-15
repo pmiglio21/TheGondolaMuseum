@@ -1,11 +1,12 @@
 import { Component, ViewChild, ElementRef, Inject } from "@angular/core";
 import { ActivatedRoute, RouterOutlet, Router, Params } from '@angular/router';
+import { CommonModule } from '@angular/common'; // Import CommonModule
 import { DOCUMENT } from '@angular/common';
 import { WebApiService } from './../services/webapi.service'; 
 
 @Component({
   selector: 'watch-video',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, CommonModule],
   templateUrl: './watchvideocomponent.html',
   styleUrl: './watchvideocomponent.css'
 })
@@ -58,12 +59,17 @@ export class WatchVideoComponent {
 
         // console.log(this.originalFileName)
       });
+  }
 
-      // Automatically play the video when the route is loaded
-      const myVideo: HTMLVideoElement | null = this.doc.getElementById("my_video_1") as HTMLVideoElement;
-      if (myVideo) {
-        myVideo.play();
-      }
+  ngAfterViewInit() {
+    const myVideo: HTMLVideoElement | null = this.doc.getElementById("video-element") as HTMLVideoElement;
+    if (myVideo) {
+      myVideo.play().catch((error) => {
+        console.error('Error playing video:', error);
+      });
+    } else {
+      console.error('Video element not found.');
+    }
   }
 
   setupVideo() {

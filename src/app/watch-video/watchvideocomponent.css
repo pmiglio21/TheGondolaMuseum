@@ -1,3 +1,123 @@
-p {
-    font-family: Lato;
-  }
+.main {
+  display: flex;
+  flex-direction: row;
+  height: 100vh; /* Full viewport height */
+}
+
+/* Style the navbar */
+.link-navbar {
+  width: 200px; /* Set the width of the navbar */
+  background-color: #333; /* Dark background color */
+  color: white; /* White text color */
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Add a shadow for better visibility */
+}
+
+/* Style the navbar links */
+.link-navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.link-navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.link-navbar li {
+  margin-bottom: 10px;
+}
+
+.link-navbar button {
+  background-color: #444; /* Slightly lighter than the navbar background */
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.link-navbar button:hover {
+  background-color: #555; /* Highlight on hover */
+}
+
+.content {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  margin-left: 35px; /* Offset for the left navbar width */
+  margin-right: 20px; /* Offset for the right navbar width */
+  gap: 20px; /* Add spacing between elements */
+}
+
+/* Style the <h2> element */
+.content h2 {
+  margin: 0; /* Remove default margin */
+  padding: 10px; /* Add padding for better readability */
+  font-size: 1.5rem; /* Adjust font size */
+  text-align: center; /* Center-align the text */
+}
+
+/* Style the video container */
+#video-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* Ensure the video container takes full width */
+}
+
+.detail-navbar {
+  position: fixed; /* Fix the navbar to the right side of the screen */
+  top: 0; /* Align it to the top of the viewport */
+  right: 0; /* Align it to the right of the viewport */
+  height: 100vh; /* Make it span the full height of the viewport */
+  width: 250px; /* Set the width of the navbar */
+  background-color: #333; /* Dark background color */
+  color: white; /* White text color */
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Add a shadow for better visibility */
+  z-index: 1000; /* Ensure it appears above other elements */
+}
+
+/* Style the navbar links */
+.detail-navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.detail-navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.detail-navbar li {
+  margin-bottom: 10px;
+}
+
+.detail-navbar button {
+  background-color: #444; /* Slightly lighter than the navbar background */
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.detail-navbar button:hover {
+  background-color: #555; /* Highlight on hover */
+}

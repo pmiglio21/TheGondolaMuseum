@@ -1,22 +1,41 @@
 <script src="watchvideocomponent.ts"></script>
 
 <main class="main">
-  <nav>
+  <nav class="link-navbar">
     <a href="">The Gondola Museum</a>
     <ul>
       <li><button (click)="goToRandomVideo()">Random Video</button></li>
       <li><button (click)="goToSearch()">Search</button></li>
-      <li><a href="#">About</a></li>
+      <li><button>About</button></li>
     </ul>
   </nav>
   <div class="content">
+    <h2>{{videoId}} - {{ videoName }}</h2>
     <div id="video-display">
-      <video id="my_video_1" class="video-js vjs-default-skin" width="1280px" height="720px" controls preload="none"
+      
+      <video id="video-element" class="video-js vjs-default-skin" width="1280px" height="720px" controls preload="none"
         data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
         <source id="random-video-source" src="assets/videos/2.webm" type='video/webm' />
       </video>
+      <div id="video-details">
+        <p>Posted by {{ gondolaCreator }}, found on {{ rippedFrom }} where it was posted in {{ earliestFoundDateOfPosting }}</p>
+        <p>Background art source: {{ backgroundArtOrigin }}</p>
+        <p>Music source: {{ musicName }} - {{ musicOrigin }}</p>
+      </div>
     </div>
   </div>
+  <nav class="detail-navbar">
+    <ul>
+      <li>Tags</li>
+      <ul>
+        <li *ngFor="let tag of tags">- {{ tag }}</li>
+      </ul>
+      <li>Similar Videos</li>
+      <ul>
+        <li *ngFor="let similarVideo of similarVideos">- {{ similarVideo }}</li>
+      </ul>
+    </ul>
+  </nav>
 </main>
 
 <router-outlet />
