@@ -1,3 +1,107 @@
-p {
-    font-family: Lato;
-  }
+.main {
+  display: flex;
+  flex-direction: row;
+  height: 100vh; /* Full viewport height */
+}
+
+/* Style the navbar */
+.link-navbar {
+  width: 200px; /* Set the width of the navbar */
+  background-color: #333; /* Dark background color */
+  color: white; /* White text color */
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Add a shadow for better visibility */
+}
+
+/* Style the navbar links */
+.link-navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.link-navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.link-navbar li {
+  margin-bottom: 10px;
+}
+
+.link-navbar button {
+  background-color: #444; /* Slightly lighter than the navbar background */
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.link-navbar button:hover {
+  background-color: #555; /* Highlight on hover */
+}
+
+/* Style the search container */
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  gap: 10px;
+}
+
+
+/* Style the search input */
+.search-input {
+  width: 300px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Style the search button */
+.search-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #555;
+}
+
+/* Style the search results */
+.search-results ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.search-results li {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+
+.content {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  margin-left: 35px; /* Offset for the left navbar width */
+  margin-right: 20px; /* Offset for the right navbar width */
+  gap: 20px; /* Add spacing between elements */
+}
+

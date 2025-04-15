@@ -1,11 +1,13 @@
 import { Component, ViewChild, ElementRef, Inject } from "@angular/core";
 import { ActivatedRoute, RouterOutlet, Router, Params } from '@angular/router';
+import { FormsModule } from '@angular/forms'; // Import FormsModule
+import { CommonModule } from '@angular/common'; // Import CommonModule
 import { DOCUMENT } from '@angular/common';
 import { WebApiService } from './../services/webapi.service'; 
 
 @Component({
   selector: 'search',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, FormsModule, CommonModule],
   templateUrl: './searchcomponent.html',
   styleUrl: './searchcomponent.css'
 })
@@ -20,9 +22,18 @@ export class SearchComponent {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
-  videoId: number = 0;
+  searchQuery: string = ''; // Holds the search input value
+  results: string[] = ['Nature', 'Travel', 'Adventure', 'Music', 'Art']; // Example data
+  filteredResults: string[] = [...this.results]; // Filtered results to display
 
-  
+  onSearch() {
+    // Filter results based on the search query
+    this.filteredResults = this.results.filter((result) =>
+      result.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+  }
+
+  videoId: number = 0;
 
   ngOnInit() {
     this.webapiservice.GetMultipleByTag().subscribe((data: any) => {
