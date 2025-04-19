@@ -15,8 +15,10 @@ export class WebApiService
         return this.http.get("https://localhost:7290/GondolaVideo/GetAllDistinctTags", { responseType: 'text' });
     }
 
-    GetMultipleByTag() {
-        return this.http.get("https://localhost:7290/GondolaVideo/GetMultipleByTag", { responseType: 'text' });
+    GetMultipleByTag(tag: string) {
+        const params = { tag }; // Create query parameters
+
+        return this.http.get("https://localhost:7290/GondolaVideo/GetMultipleByTag", { params, responseType: 'text' });
     }   
 
     GetSingleByVideoId(videoId: number) {

@@ -23,7 +23,7 @@ export class SearchComponent {
   }
 
   searchQuery: string = ''; // Holds the search input value
-  results: string[] = ['Nature', 'Travel', 'Adventure', 'Music', 'Art']; // Example data
+  results: string[] = []; // Example data
   filteredResults: string[] = [...this.results]; // Filtered results to display
 
   onSearch() {
@@ -33,6 +33,18 @@ export class SearchComponent {
     );
   }
 
+  onSelect(selectedValue: string) {
+    // Handle the selected value from the dropdown
+    console.log('Selected value:', selectedValue);
+
+    // Example: Navigate to a specific page or perform an action
+    // if (selectedValue === 'mario') {
+        this.webapiservice.GetMultipleByTag(selectedValue).subscribe((data: any) => {
+        console.log(data);
+      });
+    // }
+  }
+
   videoId: number = 0;
 
   ngOnInit() {
@@ -40,7 +52,7 @@ export class SearchComponent {
 
       this.results = JSON.parse(data);
 
-      console.log(data);
+      // console.log(data);
     });
     
     // this.webapiservice.GetMultipleByTag().subscribe((data: any) => {
