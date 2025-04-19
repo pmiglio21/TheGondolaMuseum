@@ -36,9 +36,16 @@ export class SearchComponent {
   videoId: number = 0;
 
   ngOnInit() {
-    this.webapiservice.GetMultipleByTag().subscribe((data: any) => {
+    this.webapiservice.GetAllDistinctTags().subscribe((data: any) => {
+
+      this.results = JSON.parse(data);
+
       console.log(data);
     });
+    
+    // this.webapiservice.GetMultipleByTag().subscribe((data: any) => {
+    //   console.log(data);
+    // });
   }
 
   setupVideo() {

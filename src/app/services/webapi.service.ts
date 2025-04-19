@@ -11,6 +11,10 @@ export class WebApiService
         console.log('HttpClient is working!');
     }
 
+    GetAllDistinctTags() {
+        return this.http.get("https://localhost:7290/GondolaVideo/GetAllDistinctTags", { responseType: 'text' });
+    }
+
     GetMultipleByTag() {
         return this.http.get("https://localhost:7290/GondolaVideo/GetMultipleByTag", { responseType: 'text' });
     }   

@@ -15,14 +15,14 @@
       placeholder="Search..."
       [(ngModel)]="searchQuery"
       (input)="onSearch()"
+      list="search-options"
       class="search-input"
     />
+    <datalist id="search-options">
+      <option *ngFor="let result of filteredResults" [value]="result"></option>
+
+    </datalist>
     <button (click)="onSearch()" class="search-button">Search</button>
-  </div>
-  <div class="search-results">
-    <ul>
-      <li *ngFor="let result of filteredResults">{{ result }}</li>
-    </ul>
   </div>
   <div class="content">
    
