@@ -23,13 +23,13 @@ export class SearchComponent {
   }
 
   searchQuery: string = ''; // Holds the search input value
-  results: string[] = []; // Example data
-  filteredResults: string[] = [...this.results]; // Filtered results to display
+  allDistinctTags: string[] = []; // Example data
+  filteredTags: string[] = [...this.allDistinctTags]; // Filtered results to display
 
   onSearch() {
     // Filter results based on the search query
-    this.filteredResults = this.results.filter((result) =>
-      result.toLowerCase().includes(this.searchQuery.toLowerCase())
+    this.filteredTags = this.allDistinctTags.filter((tag) =>
+      tag.toLowerCase().includes(this.searchQuery.toLowerCase())
     );
   }
 
@@ -38,11 +38,11 @@ export class SearchComponent {
     console.log('Selected value:', selectedValue);
 
     // Example: Navigate to a specific page or perform an action
-    // if (selectedValue === 'mario') {
+    if (this.filteredTags.some(tag => tag.toLowerCase() === selectedValue.toLowerCase())) {
         this.webapiservice.GetMultipleByTag(selectedValue).subscribe((data: any) => {
         console.log(data);
       });
-    // }
+    }
   }
 
   videoId: number = 0;
@@ -50,14 +50,8 @@ export class SearchComponent {
   ngOnInit() {
     this.webapiservice.GetAllDistinctTags().subscribe((data: any) => {
 
-      this.results = JSON.parse(data);
-
-      // console.log(data);
+      this.allDistinctTags = JSON.parse(data);
     });
-    
-    // this.webapiservice.GetMultipleByTag().subscribe((data: any) => {
-    //   console.log(data);
-    // });
   }
 
   setupVideo() {

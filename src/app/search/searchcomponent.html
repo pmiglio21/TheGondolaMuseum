@@ -17,11 +17,12 @@
       (input)="onSearch()"
       (change)="onSelect(searchQuery)"
       (keydown.enter)="onSelect(searchQuery)"
+      (keydown.mouseenter)="onSelect(searchQuery)"
       list="search-options"
       class="search-input"
     />
     <datalist id="search-options">
-      <option *ngFor="let result of filteredResults" [value]="result"></option>
+      <option *ngFor="let tag of filteredTags" [value]="tag"></option>
 
     </datalist>
     <button (click)="onSearch()" class="search-button">Search</button>
