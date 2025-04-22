@@ -34,6 +34,11 @@ export class WatchVideoComponent {
   similarVideos?: number[];
   rippedFrom?: string;
 
+  searchByTag(tag: string) {
+    // Navigate to the SearchComponent with the selected tag as a query parameter
+    this.router.navigate(['/search'], { queryParams: { tag } });
+  }
+
   ngOnInit() {
       this.activatedRoute.params.subscribe((params: Params) => this.videoId = params['id']);
 
@@ -102,5 +107,10 @@ export class WatchVideoComponent {
 
   goToSearch(){
     this.router.navigate(['/search']);  
+  }
+
+  goToSimilarVideo(videoId: number) {
+    // Navigate to the WatchVideoComponent with the selected video ID
+    this.router.navigate(['/watch-video', videoId]);
   }
 }

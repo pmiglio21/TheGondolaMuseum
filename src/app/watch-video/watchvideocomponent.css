@@ -122,3 +122,51 @@
 .detail-navbar button:hover {
   background-color: #555; /* Highlight on hover */
 }
+
+.tags-container {
+  margin-top: 20px;
+}
+
+.tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag-button {
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.tag-button:hover {
+  background-color: #555;
+}
+
+.similar-videos-container {
+  margin-top: 20px;
+}
+
+.similar-videos-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.similar-video-button {
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.similar-video-button:hover {
+  background-color: #555;
+}

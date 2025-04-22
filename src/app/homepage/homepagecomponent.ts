@@ -51,40 +51,40 @@ export class HomePageComponent {
     return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
   }
 
-  toggleVideo() {
-    this.videoplayer.nativeElement.play();
-  }
+  // toggleVideo() {
+  //   this.videoplayer.nativeElement.play();
+  // }
 
-  playPause() {
-    var myVideo: any = document.getElementById("my_video_1");
-    if (myVideo.paused) myVideo.play();
-    else myVideo.pause();
-  }
+  // playPause() {
+  //   var myVideo: any = document.getElementById("my_video_1");
+  //   if (myVideo.paused) myVideo.play();
+  //   else myVideo.pause();
+  // }
 
-  makeBig() {
-    var myVideo: any = document.getElementById("my_video_1");
-    myVideo.width = 560;
-  }
+  // makeBig() {
+  //   var myVideo: any = document.getElementById("my_video_1");
+  //   myVideo.width = 560;
+  // }
 
-  makeSmall() {
-    var myVideo: any = document.getElementById("my_video_1");
-    myVideo.width = 320;
-  }
+  // makeSmall() {
+  //   var myVideo: any = document.getElementById("my_video_1");
+  //   myVideo.width = 320;
+  // }
 
-  makeNormal() {
-    var myVideo: any = document.getElementById("my_video_1");
-    myVideo.width = 420;
-  }
+  // makeNormal() {
+  //   var myVideo: any = document.getElementById("my_video_1");
+  //   myVideo.width = 420;
+  // }
 
-  skip(skipLength: number) {
-    let video: any = document.getElementById("my_video_1");
-    video.currentTime += skipLength;
-  }
+  // skip(skipLength: number) {
+  //   let video: any = document.getElementById("my_video_1");
+  //   video.currentTime += skipLength;
+  // }
 
-  restart() {
-    let video: any = document.getElementById("my_video_1");
-    video.currentTime = 0;
-  }
+  // restart() {
+  //   let video: any = document.getElementById("my_video_1");
+  //   video.currentTime = 0;
+  // }
 
   goToRandomVideo(){
       var randomIndex = this.getRandomInt()
@@ -94,5 +94,10 @@ export class HomePageComponent {
 
   goToSearch(){
     this.router.navigate(['/search']);  
+  }
+
+  searchByTag(tag: string) {
+    // Navigate to the SearchComponent with the selected tag as a query parameter
+    this.router.navigate(['/search'], { queryParams: { tag } });
   }
 }

@@ -103,6 +103,21 @@
   font-size: 1rem;
 }
 
+.search-results button {
+  width: 100%; /* Make the button take the full width of the container */
+  padding: 10px;
+  font-size: 1rem;
+  text-align: left;
+  background-color: #f8f9fa;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-results button:hover {
+  background-color: #e9ecef;
+}
+
 
 .content {
   display: flex;

@@ -14,8 +14,13 @@ import { WebApiService } from './../services/webapi.service';
 
 export class SearchComponent {
   private doc: Document;
-  constructor(@Inject(DOCUMENT) doc: any, private router: Router, private activatedRoute: ActivatedRoute, 
-                                          private webapiservice : WebApiService) {
+
+  constructor(
+    @Inject(DOCUMENT) doc: any, 
+    private router: Router, 
+    private activatedRoute: ActivatedRoute,
+    private webapiservice : WebApiService) {
+      
     this.doc = doc;
 
     // force route reload whenever params change;
@@ -25,6 +30,7 @@ export class SearchComponent {
   searchQuery: string = ''; // Holds the search input value
   allDistinctTags: string[] = []; // Example data
   filteredTags: string[] = [...this.allDistinctTags]; // Filtered results to display
+  videos: { VideoId: number; VideoName: string }[] = []; // Array to hold video data
 
   onSearch() {
     // Filter results based on the search query
@@ -41,17 +47,35 @@ export class SearchComponent {
     if (this.filteredTags.some(tag => tag.toLowerCase() === selectedValue.toLowerCase())) {
         this.webapiservice.GetMultipleByTag(selectedValue).subscribe((data: any) => {
         console.log(data);
+
+        this.videos = JSON.parse(data);
       });
     }
   }
 
   videoId: number = 0;
 
+  onVideoSelect(videoId: number) {
+    // Handle the video selection (e.g., navigate to a video page)
+    console.log('Selected VideoId:', videoId);
+    this.router.navigate(['/watch-video', videoId]);
+  }
+
   ngOnInit() {
     this.webapiservice.GetAllDistinctTags().subscribe((data: any) => {
 
       this.allDistinctTags = JSON.parse(data);
     });
+
+    // Get the tag from the query parameters
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params['tag']) {
+        this.searchQuery = params['tag'];
+        this.onSearch();
+      }
+    });
+
+    this.onSelect(this.searchQuery);
   }
 
   setupVideo() {

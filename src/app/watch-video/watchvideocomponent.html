@@ -26,14 +26,18 @@
   </div>
   <nav class="detail-navbar">
     <ul>
-      <li>Tags</li>
-      <ul>
-        <li *ngFor="let tag of tags">- {{ tag }}</li>
-      </ul>
-      <li>Similar Videos</li>
-      <ul>
-        <li *ngFor="let similarVideo of similarVideos">- {{ similarVideo }}</li>
-      </ul>
+      <h3>Tags</h3>
+      <div class="tags-list">
+        <button *ngFor="let tag of tags" (click)="searchByTag(tag)" class="tag-button">
+          - {{ tag }}
+        </button>
+      </div>
+      <h3>Similar Videos</h3>
+      <div class="similar-videos-list">
+        <button *ngFor="let videoId of similarVideos" (click)="goToSimilarVideo(videoId)" class="similar-video-button">
+          - {{ videoId }}
+        </button>
+      </div>
     </ul>
   </nav>
 </main>
