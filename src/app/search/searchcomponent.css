@@ -92,6 +92,18 @@
 }
 
 /* Style the search results */
+.search-results {
+  position: absolute; /* Position it relative to the search-container */
+  left: 0; /* Align it with the left edge of the search-container */
+  width: 90%; /* Match the width of the search-container */
+  margin-top: 10px; /* Add spacing between the search bar and results */
+  background-color: white; /* Optional: Background color for visibility */
+  border: 1px solid #ccc; /* Optional: Add a border for separation */
+  border-radius: 5px; /* Optional: Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for better visibility */
+  padding: 10px; /* Add padding inside the results container */
+}
+
 .search-results ul {
   list-style: none;
   padding: 0;

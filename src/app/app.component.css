@@ -1,3 +1,45 @@
-p {
-    font-family: Lato;
-  }
+.link-navbar {
+  position: fixed;
+  width: 10%; /* Set the width of the navbar */
+  height: 100%;
+  background-color: #333; /* Dark background color */
+  color: white; /* White text color */
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Add a shadow for better visibility */
+}
+
+/* Style the navbar links */
+.link-navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.link-navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.link-navbar li {
+  margin-bottom: 10px;
+}
+
+.link-navbar button {
+  background-color: #444; /* Slightly lighter than the navbar background */
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.link-navbar button:hover {
+  background-color: #555; /* Highlight on hover */
+}

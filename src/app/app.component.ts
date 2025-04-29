@@ -9,5 +9,22 @@ import { RouterOutlet, Router } from '@angular/router';
 })
 
 export class AppComponent {
-  
+  constructor(private router: Router) {}
+
+  getRandomInt() {
+    var minimum = 1
+    var maximum = 1000
+
+    return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+  }
+
+  goToRandomVideo(){
+      var randomIndex = this.getRandomInt()
+
+      this.router.navigate(['/watch-video', randomIndex]);  
+  }
+
+  goToSearch() {
+    this.router.navigate(['/search']);
+  }
 }
