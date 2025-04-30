@@ -1,6 +1,9 @@
 <script src="watchvideocomponent.ts"></script>
 
 <main class="main">
+  <video id="thumbnail-video" style="display: none;"></video>
+  <canvas id="thumbnail-canvas" style="display: none;"></canvas>
+
   <div class="search-container">
     <input
       type="text"
@@ -13,18 +16,19 @@
       list="search-options"
       class="search-input"
     />
+
     <datalist id="search-options">
       <option *ngFor="let tag of filteredTags" [value]="tag"></option>
-
     </datalist>
+
     <button (click)="onSearch()" class="search-button">Search</button>
-  </div>
-  <div class="content">
+    
     <div class="search-results">
       <ul>
         <li *ngFor="let video of videos">
-          <button (click)="onVideoSelect(video.VideoId)">
-            {{ video.VideoId }} - {{ video.VideoName }}
+          <button (click)="onVideoSelect(video.VideoId)" class="video-result-button">
+            <img [src]="video.ThumbnailUrl" alt="Video Thumbnail" class="video-thumbnail" />
+            <span>{{ video.VideoId }} - {{ video.VideoName }}</span>
           </button>
         </li>
       </ul>
