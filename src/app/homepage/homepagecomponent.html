@@ -2,21 +2,13 @@
 
 <main class="main">
   <div class="content">
-    <!-- <div id="video-display">
-      <video id="my_video_1" class="video-js vjs-default-skin" width="1280px" height="720px" controls preload="none"
-        data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
-        <source id="random-video-source" src="assets/videos/2.webm" type='video/webm' />
+    <h2>{{videoId}} - {{ videoName }}</h2>
+    <div id="video-display">
+      <video id="random-video" controls width="640" height="360">
+        <source id="random-video-source" src="" type="video/webm" />
+        Your browser does not support the video tag.
       </video>
     </div>
-    <div id="video-controls">
-      <button (click)="playPause()">Play/Pause</button>
-      <button (click)="makeBig()">Big</button>
-      <button (click)="makeSmall()">Small</button>
-      <button (click)="makeNormal()">Normal</button>
-      <button (click)="restart();">Restart</button>
-      <button (click)="skip(-10)">Rewind</button>
-      <button (click)="skip(10)">Fastforward</button>
-    </div> -->
   </div>
 </main>
 

@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef, Inject } from "@angular/core";
 import { RouterOutlet, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
+import { WebApiService } from './../services/webapi.service'; 
 
 @Component({
   selector: 'app-root',
@@ -11,12 +12,26 @@ import { DOCUMENT } from '@angular/common';
 
 export class HomePageComponent {
   private doc: Document;
-  constructor(@Inject(DOCUMENT) doc: any, private router: Router) {
+  private dailyVideoId: number = 0;
+
+  constructor(@Inject(DOCUMENT) doc: any, private router: Router, private webapiservice : WebApiService) {
     this.doc = doc;
+    this.dailyVideoId = this.getDailyRandomInt(1, 1000);
+  }
+
+  getDailyRandomInt(min: number, max: number): number {
+    const today = new Date().toISOString().split('T')[0];
+    let hash = 0;
+    for (let i = 0; i < today.length; i++) {
+      hash = today.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return Math.abs(hash % (max - min + 1)) + min;
   }
   
+  videoId: number = 0;
+  videoName: string = "";
 
-  title = "The Gondola Museum"
+  title = "The Gondola Archive"
 
   dailyRandomVideoSource = "assets/videos/2.webm"
 
@@ -25,79 +40,24 @@ export class HomePageComponent {
   isPlay: boolean = false;
   
   ngOnInit() {
-    // this.doc.addEventListener('click', function(evt) {
-    //   console.log(evt.target);}, false);
-
     this.setupDailyRandomVideo();
+
+    this.webapiservice.GetSingleByVideoId(this.dailyVideoId).subscribe((data: any) => {
+
+      const videoData = JSON.parse(data);
+
+      // Map the JSON response to Angular variables
+      this.videoId = videoData.VideoId;
+      this.videoName = videoData.VideoName;
+    });
   }
 
   setupDailyRandomVideo() {
-    var randomVideoSource = this.doc.getElementById("random-video-source");  
-
-    var randomIndex = this.getRandomInt()
-    
-    if (randomVideoSource != null)
-    {
-      randomVideoSource.setAttribute("src", "assets/videos/"+randomIndex+".webm")
+    const randomVideoSource = this.doc.getElementById("random-video-source");
+   
+    if (randomVideoSource != null) {
+      // Dynamically set the video source
+      randomVideoSource.setAttribute("src", "assets/videos/" + this.dailyVideoId + ".webm");
     }
-
-    return
-  }
-
-  getRandomInt() {
-    var minimum = 1
-    var maximum = 1000
-
-    return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
-  }
-
-  // toggleVideo() {
-  //   this.videoplayer.nativeElement.play();
-  // }
-
-  // playPause() {
-  //   var myVideo: any = document.getElementById("my_video_1");
-  //   if (myVideo.paused) myVideo.play();
-  //   else myVideo.pause();
-  // }
-
-  // makeBig() {
-  //   var myVideo: any = document.getElementById("my_video_1");
-  //   myVideo.width = 560;
-  // }
-
-  // makeSmall() {
-  //   var myVideo: any = document.getElementById("my_video_1");
-  //   myVideo.width = 320;
-  // }
-
-  // makeNormal() {
-  //   var myVideo: any = document.getElementById("my_video_1");
-  //   myVideo.width = 420;
-  // }
-
-  // skip(skipLength: number) {
-  //   let video: any = document.getElementById("my_video_1");
-  //   video.currentTime += skipLength;
-  // }
-
-  // restart() {
-  //   let video: any = document.getElementById("my_video_1");
-  //   video.currentTime = 0;
-  // }
-
-  goToRandomVideo(){
-      var randomIndex = this.getRandomInt()
-
-      this.router.navigate(['/watch-video', randomIndex]);  
-  }
-
-  goToSearch(){
-    this.router.navigate(['/search']);  
-  }
-
-  searchByTag(tag: string) {
-    // Navigate to the SearchComponent with the selected tag as a query parameter
-    this.router.navigate(['/search'], { queryParams: { tag } });
   }
 }

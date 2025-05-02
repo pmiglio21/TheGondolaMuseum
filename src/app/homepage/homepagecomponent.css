@@ -1,3 +1,31 @@
-p {
-    font-family: Lato;
-  }
+.main {
+  display: flex;
+  flex-direction: row;
+  height: 100vh; /* Full viewport height */
+}
+
+.content {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  margin-left: 8%;
+  width: 80%; /* Ensure the video container takes full width */
+  gap: 20px; /* Add spacing between elements */
+}
+
+/* Style the <h2> element */
+.content h2 {
+  margin: 0; /* Remove default margin */
+  padding: 10px; /* Add padding for better readability */
+  font-size: 1.5rem; /* Adjust font size */
+  text-align: center; /* Center-align the text */
+}
+
+/* Style the video container */
+#video-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%; /* Ensure the video container takes full width */
+}
