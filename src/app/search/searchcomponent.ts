@@ -29,23 +29,20 @@ export class SearchComponent {
 
   searchQuery: string = ''; // Holds the search input value
   allDistinctTags: string[] = []; // Example data
-  filteredTags: string[] = [...this.allDistinctTags]; // Filtered results to display
+  filteredTags: string[] = []; // Filtered results to display
   videos: { VideoId: number; VideoName: string; VideoUrl: string; ThumbnailUrl?: string }[] = [];
   // videos: { VideoId: number; VideoName: string }[] = []; // Array to hold video data
 
   onSearch() {
     // Filter results based on the search query
     this.filteredTags = this.allDistinctTags.filter((tag) =>
-      tag.toLowerCase().includes(this.searchQuery.toLowerCase())
+      tag.trim().toLowerCase().includes(this.searchQuery.trim().toLowerCase())
     );
   }
 
   onSelect(selectedValue: string) {
-    // Handle the selected value from the dropdown
-    console.log('Selected value:', selectedValue);
-
     // Example: Navigate to a specific page or perform an action
-    if (this.filteredTags.some(tag => tag.toLowerCase() === selectedValue.toLowerCase())) {
+    if (this.allDistinctTags.some(tag => tag.trim().toLowerCase() === selectedValue.trim().toLowerCase())) {
         this.webapiservice.GetMultipleByTag(selectedValue).subscribe((data: any) => {
         console.log(data);
 
@@ -95,26 +92,29 @@ export class SearchComponent {
           video.ThumbnailUrl = canvasElement.toDataURL('image/jpeg');
   
           // Trigger change detection if needed
-          console.log(`Generated thumbnail for video ${video.VideoId}`);
+          // console.log(`Generated thumbnail for video ${video.VideoId}`);
         };
       };
     });
   }
 
-  ngOnInit() {
-    this.webapiservice.GetAllDistinctTags().subscribe((data: any) => {
-
+  async ngOnInit() {
+    try {
+      // Wait for GetAllDistinctTags to complete
+      var data: any = await this.webapiservice.GetAllDistinctTags().toPromise();
       this.allDistinctTags = JSON.parse(data);
-    });
+  
+      // Proceed with other logic after tags are loaded
+      this.activatedRoute.queryParams.subscribe(params => {
+        if (params['tag']) {
+          this.searchQuery = params['tag'];
+          this.onSearch(); // Trigger search after tags are loaded
+        }
+      });
 
-    // Get the tag from the query parameters
-    this.activatedRoute.queryParams.subscribe(params => {
-      if (params['tag']) {
-        this.searchQuery = params['tag'];
-        this.onSearch();
-      }
-    });
-
-    this.onSelect(this.searchQuery);
+      this.onSelect(this.searchQuery); // Trigger search after tags are loaded
+    } catch (error) {
+      console.error('Error loading tags:', error);
+    }
   }
 }
