@@ -1,36 +1,38 @@
 .main {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: 100vh; /* Full viewport height */
   overflow-y: visible; /* Allow vertical scrolling if content overflows */
 }
 
 /* Style the search container */
 .search-container {
-  position: sticky; /* Fix the search bar at the top of the screen */
-  top: 0; /* Align it to the top */
-  left: 0; /* Align it to the left */
-  height: 40px;
-  width: 50%; /* Make it span the full width of the screen */
+  display: flex;
+  flex-direction: column; /* Stack the search bar and results vertically */
+  position: relative; /* Ensure the container is the positioning context */
+  width: 50%; /* Adjust the width as needed */
   background-color: #f8f9fa; /* Light background color for visibility */
   padding: 10px 20px; /* Add padding for spacing */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a shadow for better visibility */
-  display: flex;
-  align-items: center;
-  margin-left: 15%;
-  gap: 10px; /* Add spacing between the input and button */
+  margin-left: 15%; /* Offset for the navbar */
+  margin-top: 1%; /* Add spacing from the top */
+  gap: 10px; /* Add spacing between the input and results */
 }
 
-/* Style the search input */
+.search-bar {
+  display: flex; /* Align the input and button horizontally */
+  gap: 10px; /* Add spacing between the input and button */
+  width: 100%; /* Ensure the search bar takes up the full width */
+}
+
 .search-input {
-  flex: 1; /* Allow the input to take up available space */
+  flex: 1; /* Allow the input to take up the remaining space */
   padding: 10px;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-/* Style the search button */
 .search-button {
   padding: 10px 20px;
   font-size: 1rem;
@@ -39,6 +41,10 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #555;
 }
 
 .search-button:hover {

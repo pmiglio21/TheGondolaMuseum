@@ -5,7 +5,8 @@
   <canvas id="thumbnail-canvas" style="display: none;"></canvas>
 
   <div class="search-container">
-    <input
+    <div class="search-bar">
+      <input
       type="text"
       placeholder="Search..."
       [(ngModel)]="searchQuery"
@@ -15,13 +16,14 @@
       (keydown.mouseenter)="onSelect(searchQuery)"
       list="search-options"
       class="search-input"
-    />
+      />
 
-    <datalist id="search-options">
-      <option *ngFor="let tag of filteredTags" [value]="tag"></option>
-    </datalist>
+      <datalist id="search-options">
+        <option *ngFor="let tag of filteredTags" [value]="tag"></option>
+      </datalist>
 
-    <button (click)="onSearch()" class="search-button">Search</button>
+      <button (click)="onSearch()" class="search-button">Search</button>
+    </div>
     
     <div class="search-results">
       <ul>

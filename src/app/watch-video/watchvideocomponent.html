@@ -17,14 +17,14 @@
   </div>
   <nav class="detail-navbar">
     <ul>
-      <h3>Tags</h3>
-      <div class="tags-list">
+      <h3 *ngIf="tags && tags.length > 0">Tags</h3>
+      <div class="tags-list" *ngIf="tags && tags.length > 0">
         <button *ngFor="let tag of tags" (click)="searchByTag(tag)" class="tag-button">
           - {{ tag }}
         </button>
       </div>
-      <h3>Similar Videos</h3>
-      <div class="similar-videos-list">
+      <h3 *ngIf="similarVideos && similarVideos.length > 0">Similar Videos</h3>
+      <div class="similar-videos-list" *ngIf="similarVideos && similarVideos.length > 0">
         <button *ngFor="let videoId of similarVideos" (click)="goToSimilarVideo(videoId)" class="similar-video-button">
           - {{ videoId }}
         </button>
