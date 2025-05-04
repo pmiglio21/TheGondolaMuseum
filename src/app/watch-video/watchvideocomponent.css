@@ -1,7 +1,14 @@
+html, body {
+  height: 100%; /* Ensure the body takes up the full height of the viewport */
+  overflow-y: hidden; /* Disable vertical scrolling */
+  margin: 0; /* Remove default margin */
+}
+
 .main {
   display: flex;
   flex-direction: row;
-  height: 100vh; /* Full viewport height */
+  overflow-y: hidden;
+  height: 100%; /* Full viewport height */
 }
 
 .content {
@@ -11,7 +18,9 @@
   justify-content: center; /* Center vertically */
   margin-left: 8%;
   width: 80%; /* Ensure the video container takes full width */
+  height: 100%; /* Ensure content fits within the main container */
   gap: 20px; /* Add spacing between elements */
+  overflow: hidden; /* Prevent scrolling within the content */
 }
 
 /* Style the <h2> element */
@@ -27,7 +36,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%; /* Ensure the video container takes full width */
+  justify-content: center;
+  width: 100%; /* Ensure the video container takes full width */
+  max-height: 90%; /* Prevent it from exceeding the parent container */
+  overflow: hidden; /* Prevent scrolling within the video container */
 }
 
 .detail-navbar {
@@ -43,6 +55,20 @@
   padding: 20px;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Add a shadow for better visibility */
   z-index: 1000; /* Ensure it appears above other elements */
+  overflow-y: auto; /* Enable vertical scrolling within the navbar */
+}
+
+.detail-navbar::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.detail-navbar::-webkit-scrollbar-thumb {
+  background-color: #555; /* Color of the scrollbar thumb */
+  border-radius: 4px; /* Rounded corners */
+}
+
+.detail-navbar::-webkit-scrollbar-thumb:hover {
+  background-color: #777; /* Color on hover */
 }
 
 /* Style the navbar links */

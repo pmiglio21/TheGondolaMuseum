@@ -1,7 +1,8 @@
 .main {
   display: flex;
   flex-direction: row;
-  height: 100vh; /* Full viewport height */
+  height: 100%; /* Full viewport height */
+  overflow: hidden; /* Disable vertical scrolling */
 }
 
 .content {
