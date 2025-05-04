@@ -27,24 +27,47 @@ export class SearchComponent {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
+  async ngOnInit() {
+    try {
+      // Wait for GetAllDistinctTags to complete
+      var data: any = await this.webapiservice.GetAllDistinctTags().toPromise();
+      this.allDistinctTags = JSON.parse(data);
+  
+      // Proceed with other logic after tags are loaded
+      this.activatedRoute.queryParams.subscribe(params => {
+        if (params['tag']) {
+          this.searchQuery = params['tag'];
+          this.onTextEnteredIntoSearch(); // Trigger search after tags are loaded
+        }
+      });
+
+      this.onSearchBarValueSelected(this.searchQuery); // Trigger search after tags are loaded
+    } catch (error) {
+      console.error('Error loading tags:', error);
+    }
+  }
+
   searchQuery: string = ''; // Holds the search input value
   allDistinctTags: string[] = []; // Example data
   filteredTags: string[] = []; // Filtered results to display
   videos: { VideoId: number; VideoName: string; VideoUrl: string; ThumbnailUrl?: string }[] = [];
-  // videos: { VideoId: number; VideoName: string }[] = []; // Array to hold video data
 
-  onSearch() {
+  onTextEnteredIntoSearch() {
     // Filter results based on the search query
     this.filteredTags = this.allDistinctTags.filter((tag) =>
       tag.trim().toLowerCase().includes(this.searchQuery.trim().toLowerCase())
     );
   }
 
-  onSelect(selectedValue: string) {
+  onSearchBarValueSelected(selectedValue: string) {
     // Example: Navigate to a specific page or perform an action
     if (this.allDistinctTags.some(tag => tag.trim().toLowerCase() === selectedValue.trim().toLowerCase())) {
         this.webapiservice.GetMultipleByTag(selectedValue).subscribe((data: any) => {
         console.log(data);
+
+        if (selectedValue) {
+          this.renavigateToSearch(selectedValue); // Call a method to load search results for the tag
+        }
 
         // Parse the data and include VideoUrl for each video
         this.videos = JSON.parse(data).map((video: any) => ({
@@ -57,6 +80,11 @@ export class SearchComponent {
         this.generateThumbnails();
       });
     }
+  }
+
+  renavigateToSearch(tag: string) {
+    // Navigate to the SearchComponent with the selected tag as a query parameter
+    this.router.navigate(['/search'], { queryParams: { tag } });
   }
 
   videoId: number = 0;
@@ -98,25 +126,5 @@ export class SearchComponent {
         };
       };
     });
-  }
-
-  async ngOnInit() {
-    try {
-      // Wait for GetAllDistinctTags to complete
-      var data: any = await this.webapiservice.GetAllDistinctTags().toPromise();
-      this.allDistinctTags = JSON.parse(data);
-  
-      // Proceed with other logic after tags are loaded
-      this.activatedRoute.queryParams.subscribe(params => {
-        if (params['tag']) {
-          this.searchQuery = params['tag'];
-          this.onSearch(); // Trigger search after tags are loaded
-        }
-      });
-
-      this.onSelect(this.searchQuery); // Trigger search after tags are loaded
-    } catch (error) {
-      console.error('Error loading tags:', error);
-    }
   }
 }

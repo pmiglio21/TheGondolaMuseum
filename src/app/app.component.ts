@@ -27,4 +27,8 @@ export class AppComponent {
   goToSearch() {
     this.router.navigate(['/search']);
   }
+
+  goToAbout() {
+    this.router.navigate(['/about']);
+  }
 }

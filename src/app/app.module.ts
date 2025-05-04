@@ -9,13 +9,15 @@ import { SearchComponent } from './search/searchcomponent';
 import { routes } from './app.routes'; // Import routes
 import { WebApiService } from './services/webapi.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AboutComponent } from './about/aboutcomponent';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     WatchVideoComponent,
-    SearchComponent
+    SearchComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
