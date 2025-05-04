@@ -62,9 +62,11 @@ export class SearchComponent {
   videoId: number = 0;
 
   onVideoSelect(videoId: number) {
-    // Handle the video selection (e.g., navigate to a video page)
-    console.log('Selected VideoId:', videoId);
-    this.router.navigate(['/watch-video', videoId]);
+    const videoIds = this.videos.map(video => video.VideoId);
+    
+    this.router.navigate(['/watch-video', videoId], {
+      queryParams: { videoIds: JSON.stringify(videoIds) }
+    });
   }
 
   generateThumbnails() {

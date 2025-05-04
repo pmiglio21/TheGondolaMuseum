@@ -2,12 +2,21 @@
 
 <main class="main">
   <div class="content">
-    <h2>{{videoId}} - {{ videoName }}</h2>
+    <div id="video-header">
+      <button id="left-button" (click)="goToPreviousVideo()">&#9664;</button>
+      <h2>{{videoId}} - {{ videoName }}</h2>
+      <button id="right-button" (click)="goToNextVideo()">&#9654;</button>
+    </div>
     <div id="video-display">
-      <video id="video-element" class="video-js vjs-default-skin" width="1280px" height="720px" controls preload="none"
+
+      
+      
+      <video id="video-element" width="1280px" height="720px" controls preload="none"
         data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
         <source id="random-video-source" src="assets/videos/2.webm" type='video/webm' />
       </video>
+
+
       <div id="video-details">
         <p>Posted by {{ gondolaCreator }}, found on {{ rippedFrom }} where it was posted in {{ earliestFoundDateOfPosting }}</p>
         <p>Background art source: {{ backgroundArtOrigin }}</p>
