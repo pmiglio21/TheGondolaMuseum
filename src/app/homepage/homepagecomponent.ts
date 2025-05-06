@@ -60,4 +60,8 @@ export class HomePageComponent {
       randomVideoSource.setAttribute("src", "assets/videos/" + this.dailyVideoId + ".webm");
     }
   }
+
+  goToWatchVideo() {
+    this.router.navigate(['/watch-video', this.videoId]);
+  }
 }

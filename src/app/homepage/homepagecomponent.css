@@ -10,7 +10,7 @@
   flex-direction: column; /* Stack elements vertically */
   align-items: center; /* Center horizontally */
   justify-content: center; /* Center vertically */
-  margin-left: 8%;
+  margin-left: 12%;
   width: 80%; /* Ensure the video container takes full width */
   gap: 20px; /* Add spacing between elements */
 }
@@ -56,4 +56,20 @@
   flex-direction: column;
   align-items: center;
   width: 80%; /* Ensure the video container takes full width */
+  padding-top: 20px;
+}
+
+#watch-video-button {
+  margin-top: 20px; /* Add spacing above the button */
+  padding: 10px 20px; /* Add padding inside the button */
+  font-size: 1rem; /* Adjust font size */
+  background-color: #444; /* Button background color */
+  color: white; /* Button text color */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Add rounded corners */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+#watch-video-button:hover {
+  background-color: #555; /* Darken button on hover */
 }

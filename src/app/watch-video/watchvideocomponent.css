@@ -71,6 +71,7 @@ html, body {
   top: 100%;
   width: 100%; /* Ensure the video container takes full width */
   max-height: 90%; /* Prevent it from exceeding the parent container */
+  padding-top: 20px;
   overflow: hidden; /* Prevent scrolling within the video container */
 }
 

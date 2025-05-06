@@ -7,10 +7,11 @@
       <h2>{{videoId}} - {{ videoName }}</h2>
     </div>
     <div id="video-display">
-      <video id="random-video" controls width="640" height="360">
+      <video id="random-video" controls width="1100" height="600">
         <source id="random-video-source" src="" type="video/webm" />
         Your browser does not support the video tag.
       </video>
+      <button id="watch-video-button" (click)="goToWatchVideo()">Get Full Info</button>
     </div>
   </div>
 </main>
