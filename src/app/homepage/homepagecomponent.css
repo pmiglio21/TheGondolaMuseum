@@ -15,6 +15,33 @@
   gap: 20px; /* Add spacing between elements */
 }
 
+#video-header {
+  display: flex; /* Enable Flexbox for alignment */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+  text-align: center; /* Center-align the text */
+  width: 100vw; /* Make the header span the full width of the viewport */
+  padding: 20px; /* Add padding for spacing */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent gray background */
+  color: white; /* Text color */
+  border-radius: 0; /* Remove rounded corners to span the full width */
+  box-sizing: border-box; /* Include padding in width calculation */
+  margin: 0; /* Remove any default margin */
+}
+
+#video-header h1 {
+  font-size: 2rem; /* Adjust font size for the main title */
+  margin: 0; /* Remove default margin */
+  padding: 10px 0; /* Add spacing above and below */
+}
+
+#video-header h2 {
+  font-size: 1.5rem; /* Adjust font size for the subtitle */
+  margin: 0; /* Remove default margin */
+  padding: 5px 0; /* Add spacing above and below */
+}
+
 /* Style the <h2> element */
 .content h2 {
   margin: 0; /* Remove default margin */

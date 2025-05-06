@@ -53,15 +53,6 @@ html, body {
   cursor: pointer; /* Change cursor to pointer */
 }
 
-#video-header button:disabled {
-  background-color: #888; /* Gray out disabled buttons */
-  cursor: not-allowed; /* Show not-allowed cursor for disabled buttons */
-}
-
-#video-header button:hover:not(:disabled) {
-  background-color: #555; /* Darken button on hover */
-}
-
 #video-header h2 {
   margin: 0; /* Remove default margin */
   font-size: 1.5rem; /* Adjust font size */
