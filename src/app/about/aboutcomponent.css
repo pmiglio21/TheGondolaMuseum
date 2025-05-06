@@ -1,16 +1,24 @@
 .about-container {
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  color: #333;
-  line-height: 1.6;
-}
-
-.about-container h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-  color: #444;
-}
-
-.about-container p {
-  margin-bottom: 15px;
-}
+    font-family: Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 15%;
+    top: 100%;
+    width: 80%; /* Ensure the video container takes full width */
+    max-height: 90%; /* Prevent it from exceeding the parent container */
+    overflow: hidden; /* Prevent scrolling within the video container */
+  }
+  
+  .about-container h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #444;
+  }
+  
+  .about-container p {
+    margin-bottom: 15px;
+  }
