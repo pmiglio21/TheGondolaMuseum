@@ -14,12 +14,12 @@ import { WebApiService } from './../services/webapi.service';
 
 export class SearchComponent {
   private doc: Document;
-
+  
   constructor(
     @Inject(DOCUMENT) doc: any, 
     private router: Router, 
     private activatedRoute: ActivatedRoute,
-    private webapiservice : WebApiService) {
+    private webApiService : WebApiService) {
       
     this.doc = doc;
 
@@ -30,7 +30,7 @@ export class SearchComponent {
   async ngOnInit() {
     try {
       // Wait for GetAllDistinctTags to complete
-      var data: any = await this.webapiservice.GetAllDistinctTags().toPromise();
+      var data: any = await this.webApiService.GetAllDistinctTags().toPromise();
       this.allDistinctTags = JSON.parse(data);
   
       // Proceed with other logic after tags are loaded
@@ -47,10 +47,37 @@ export class SearchComponent {
     }
   }
 
+  searchMode: string = 'tag'; // Default search mode is "tag"
   searchQuery: string = ''; // Holds the search input value
   allDistinctTags: string[] = []; // Example data
   filteredTags: string[] = []; // Filtered results to display
   videos: { VideoId: number; VideoName: string; VideoUrl: string; ThumbnailUrl?: string }[] = [];
+
+  performSearch() {
+    if (this.searchMode === 'tag') {
+      this.searchByTag(this.searchQuery);
+    } else if (this.searchMode === 'source') {
+      this.searchBySource(this.searchQuery);
+    }
+  }
+
+  searchByTag(tag: string) {
+    console.log(`Searching by tag: ${tag}`);
+    // Call your API or service to search by tag
+    this.webApiService.GetMultipleByTag(tag).subscribe((results) => {
+      console.log(results);
+      // Handle the results
+    });
+  }
+
+  searchBySource(source: string) {
+    console.log(`Searching by source: ${source}`);
+    // Call your API or service to search by source
+    this.webApiService.GetMultipleBySource(source).subscribe((results) => {
+      console.log(results);
+      // Handle the results
+    });
+  }
 
   onTextEnteredIntoSearch() {
     // Filter results based on the search query
@@ -62,7 +89,7 @@ export class SearchComponent {
   onSearchBarValueSelected(selectedValue: string) {
     // Example: Navigate to a specific page or perform an action
     if (this.allDistinctTags.some(tag => tag.trim().toLowerCase() === selectedValue.trim().toLowerCase())) {
-        this.webapiservice.GetMultipleByTag(selectedValue).subscribe((data: any) => {
+        this.webApiService.GetMultipleByTag(selectedValue).subscribe((data: any) => {
         console.log(data);
 
         if (selectedValue) {

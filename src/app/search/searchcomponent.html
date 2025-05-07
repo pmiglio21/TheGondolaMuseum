@@ -23,6 +23,11 @@
       </datalist>
 
       <button (click)="onTextEnteredIntoSearch()" class="search-button">Search</button>
+
+      <select [(ngModel)]="searchMode" class="search-toggle">
+        <option value="tag">Search by Tag</option>
+        <option value="source">Search by Source</option>
+      </select>
     </div>
     
     <div class="search-results">
