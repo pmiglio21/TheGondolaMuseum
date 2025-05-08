@@ -11,9 +11,9 @@
       placeholder="Search..."
       [(ngModel)]="searchQuery"
       (input)="onTextEnteredIntoSearch()"
-      (change)="onSearchBarValueSelected(searchQuery)"
-      (keydown.enter)="onSearchBarValueSelected(searchQuery)"
-      (keydown.mouseenter)="onSearchBarValueSelected(searchQuery)"
+      (change)="onSearchButtonClicked(searchQuery)"
+      (keydown.enter)="onSearchButtonClicked(searchQuery)"
+      (keydown.mouseenter)="onSearchButtonClicked(searchQuery)"
       list="search-options"
       class="search-input"
       />
@@ -22,7 +22,7 @@
         <option *ngFor="let tag of filteredTags" [value]="tag"></option>
       </datalist>
 
-      <button (click)="onTextEnteredIntoSearch()" class="search-button">Search</button>
+      <button (click)="onSearchButtonClicked(searchQuery)" class="search-button">Search</button>
 
       <select [(ngModel)]="searchMode" class="search-toggle">
         <option value="tag">Search by Tag</option>

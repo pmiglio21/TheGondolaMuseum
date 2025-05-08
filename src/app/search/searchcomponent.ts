@@ -37,11 +37,22 @@ export class SearchComponent {
       this.activatedRoute.queryParams.subscribe(params => {
         if (params['tag']) {
           this.searchQuery = params['tag'];
-          this.onTextEnteredIntoSearch(); // Trigger search after tags are loaded
+        }
+        else if (params['source'])
+        {
+          this.searchQuery = params['source'];
+        }
+        
+        if (params['searchMode'])
+        {
+            this.searchMode = params['searchMode'];
         }
       });
 
-      this.onSearchBarValueSelected(this.searchQuery); // Trigger search after tags are loaded
+      if (this.searchQuery)
+      {
+        this.onSearchBarValueSelected(this.searchQuery); // Trigger search after tags are loaded
+      }
     } catch (error) {
       console.error('Error loading tags:', error);
     }
@@ -53,32 +64,6 @@ export class SearchComponent {
   filteredTags: string[] = []; // Filtered results to display
   videos: { VideoId: number; VideoName: string; VideoUrl: string; ThumbnailUrl?: string }[] = [];
 
-  performSearch() {
-    if (this.searchMode === 'tag') {
-      this.searchByTag(this.searchQuery);
-    } else if (this.searchMode === 'source') {
-      this.searchBySource(this.searchQuery);
-    }
-  }
-
-  searchByTag(tag: string) {
-    console.log(`Searching by tag: ${tag}`);
-    // Call your API or service to search by tag
-    this.webApiService.GetMultipleByTag(tag).subscribe((results) => {
-      console.log(results);
-      // Handle the results
-    });
-  }
-
-  searchBySource(source: string) {
-    console.log(`Searching by source: ${source}`);
-    // Call your API or service to search by source
-    this.webApiService.GetMultipleBySource(source).subscribe((results) => {
-      console.log(results);
-      // Handle the results
-    });
-  }
-
   onTextEnteredIntoSearch() {
     // Filter results based on the search query
     this.filteredTags = this.allDistinctTags.filter((tag) =>
@@ -86,14 +71,41 @@ export class SearchComponent {
     );
   }
 
+  onSearchButtonClicked(selectedValue: string) {
+    if (this.searchMode === 'tag') {
+      console.log(`Searching by tag: ${selectedValue}`);
+      this.onSearchBarValueSelected(selectedValue); // Call a method to load search results for the tag
+    }
+    else if (this.searchMode === 'source') {
+      console.log(`Searching by source: ${selectedValue}`);
+      this.webApiService.GetMultipleBySource(selectedValue).subscribe((data: any) => {
+
+        if (selectedValue) {
+          this.renavigateToSearch("", selectedValue, this.searchMode); // Call a method to load search results for the tag
+        }
+
+        // Parse the data and include VideoUrl for each video
+        this.videos = JSON.parse(data).map((video: any) => ({
+          VideoId: video.VideoId,
+          VideoName: video.VideoName,
+          // VideoUrl: `assets/videos/${video.VideoId}.webm` // Example video path
+        }));
+
+        console.log("Videos", this.videos);
+
+        // Generate thumbnails for the videos
+        this.generateThumbnails();
+      });
+    }
+  }
+
   onSearchBarValueSelected(selectedValue: string) {
     // Example: Navigate to a specific page or perform an action
     if (this.allDistinctTags.some(tag => tag.trim().toLowerCase() === selectedValue.trim().toLowerCase())) {
         this.webApiService.GetMultipleByTag(selectedValue).subscribe((data: any) => {
-        console.log(data);
 
         if (selectedValue) {
-          this.renavigateToSearch(selectedValue); // Call a method to load search results for the tag
+          this.renavigateToSearch(selectedValue, "", this.searchMode); // Call a method to load search results for the tag
         }
 
         // Parse the data and include VideoUrl for each video
@@ -103,15 +115,22 @@ export class SearchComponent {
           // VideoUrl: `assets/videos/${video.VideoId}.webm` // Example video path
         }));
   
+        console.log("Videos", this.videos);
+
         // Generate thumbnails for the videos
         this.generateThumbnails();
       });
     }
   }
 
-  renavigateToSearch(tag: string) {
+  renavigateToSearch(tag: string, source: string, searchMode: string) {
     // Navigate to the SearchComponent with the selected tag as a query parameter
-    this.router.navigate(['/search'], { queryParams: { tag } });
+    if (this.searchMode === 'tag') {
+      this.router.navigate(['/search'], { queryParams: { tag, searchMode } });
+    }
+    else if (this.searchMode === 'source') {
+      this.router.navigate(['/search'], { queryParams: { source, searchMode } });
+    }
   }
 
   videoId: number = 0;
@@ -130,6 +149,8 @@ export class SearchComponent {
     const context = canvasElement.getContext('2d');
   
     this.videos.forEach((video, index) => {
+      console.log("Generating thumbnail for video:", video.VideoId);
+
       const videoElement = document.createElement('video');
       videoElement.src = "assets/videos/"+video.VideoId+".webm";
   
@@ -142,6 +163,8 @@ export class SearchComponent {
         videoElement.currentTime = 2;
   
         videoElement.onseeked = () => {
+          console.log("Seeking to 2 seconds for video:", video.VideoId);
+
           // Draw the current frame of the video onto the canvas
           context?.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
   

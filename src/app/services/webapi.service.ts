@@ -21,10 +21,10 @@ export class WebApiService
         return this.http.get("https://localhost:7290/GondolaVideo/GetMultipleByTag", { params, responseType: 'text' });
     }   
 
-    GetMultipleBySource(tag: string) {
-        const params = { tag }; // Create query parameters
+    GetMultipleBySource(source: string) {
+        const params = { source }; // Create query parameters
 
-        return this.http.get("https://localhost:7290/GondolaVideo/GetMultipleByTag", { params, responseType: 'text' });
+        return this.http.get("https://localhost:7290/GondolaVideo/GetMultipleBySource", { params, responseType: 'text' });
     }   
 
     GetSingleByVideoId(videoId: number) {

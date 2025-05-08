@@ -13,7 +13,7 @@ export class AppComponent {
 
   getRandomInt() {
     var minimum = 1
-    var maximum = 1854 // 1854 is the last video id in the database
+    var maximum = 1875 // 1875 is the last video id in the database
 
     return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
   }
