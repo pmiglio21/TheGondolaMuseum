@@ -34,6 +34,10 @@ export class WatchVideoComponent {
   similarVideos?: number[];
   rippedFrom?: string;
 
+  backgroundArtDescription: string = "";
+  musicDescription: string = "";
+  gondolaNotFoundDescription: string = "";
+
  // Video Ids gotten from coming from search page
   videoIdsInCollection: number[] = [];
 
@@ -66,6 +70,25 @@ export class WatchVideoComponent {
         this.earliestFoundDateOfPosting = videoData.EarliestFoundDateOfPosting;
         this.similarVideos = videoData.SimilarVideos;
         this.rippedFrom = videoData.RippedFrom;
+
+        if (this.backgroundArtOrigin != null && this.backgroundArtOrigin != "") {
+          this.backgroundArtDescription = "Background art source: " + this.backgroundArtOrigin;
+        }
+
+        if (this.musicOrigin != null && this.musicOrigin != "" && this.musicName != null && this.musicName != "") {
+          this.musicDescription = "Music source: " + this.musicOrigin + " - " + this.musicName;
+        }
+        else if (this.musicName != null && this.musicName != "") {
+          this.musicDescription = "Music source: " + this.musicName;
+        }
+        else if (this.musicOrigin != null && this.musicOrigin != "") {
+          this.musicDescription = "Music source: " + this.musicOrigin;
+        }
+
+        if (this.videoName === "???")
+        {
+          this.gondolaNotFoundDescription = "??? CAN'T FIND GONDOLA IN VIDEO ???"
+        }
 
         // console.log(this.originalFileName)
       });
@@ -110,8 +133,8 @@ export class WatchVideoComponent {
 
   goToPreviousVideo() {
     if (!this.videoIdsInCollection || this.videoIdsInCollection.length === 0) {
-      // If videoIdsInCollection is empty, decrement videoId or loop back to 1854
-      const previousVideoId = this.videoId === 1 ? 1854 : this.videoId - 1;
+      // If videoIdsInCollection is empty, decrement videoId or loop back to 1875
+      const previousVideoId = this.videoId === 1 ? 1875 : this.videoId - 1;
       this.router.navigate(['/watch-video', previousVideoId]);
     } else {
       const currentIndex = this.videoIdsInCollection.indexOf(this.videoId);
@@ -136,7 +159,7 @@ export class WatchVideoComponent {
   goToNextVideo() {
     if (!this.videoIdsInCollection || this.videoIdsInCollection.length === 0) {
       // If videoIdsInCollection is empty, increment videoId or loop back to 1
-      const nextVideoId = this.videoId === 1854 ? 1 : this.videoId + 1;
+      const nextVideoId = this.videoId === 1875 ? 1 : this.videoId + 1;
       this.router.navigate(['/watch-video', nextVideoId]);
     } else {
       const currentIndex = this.videoIdsInCollection.indexOf(this.videoId);

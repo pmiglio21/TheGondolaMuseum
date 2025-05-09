@@ -51,7 +51,7 @@ export class SearchComponent {
 
       if (this.searchQuery)
       {
-        this.onSearchBarValueSelected(this.searchQuery); // Trigger search after tags are loaded
+        this.onSearchButtonClicked(this.searchQuery); // Trigger search after tags are loaded
       }
     } catch (error) {
       console.error('Error loading tags:', error);
@@ -72,30 +72,36 @@ export class SearchComponent {
   }
 
   onSearchButtonClicked(selectedValue: string) {
-    if (this.searchMode === 'tag') {
-      console.log(`Searching by tag: ${selectedValue}`);
-      this.onSearchBarValueSelected(selectedValue); // Call a method to load search results for the tag
+    if (selectedValue === "") {
+      this.videos = []; // Clear the videos array if no search query is provided
     }
-    else if (this.searchMode === 'source') {
-      console.log(`Searching by source: ${selectedValue}`);
-      this.webApiService.GetMultipleBySource(selectedValue).subscribe((data: any) => {
+    else {
+      if (this.searchMode === 'tag') {
+        this.onSearchBarValueSelected(selectedValue); // Call a method to load search results for the tag
+      }
+      else if (this.searchMode === 'source') {
+        this.webApiService.GetMultipleBySource(selectedValue).subscribe((data: any) => {
+  
+          if (selectedValue) {
+            this.renavigateToSearch("", selectedValue, this.searchMode); // Call a method to load search results for the tag
+          }
+  
+          if (data === null || data === "") {
+            this.videos = []; // Clear the videos array if no data is returned
+          }
+          else {
+            // Parse the data and include VideoUrl for each video
+            this.videos = JSON.parse(data).map((video: any) => ({
+              VideoId: video.VideoId,
+              VideoName: video.VideoName,
+              // VideoUrl: `assets/videos/${video.VideoId}.webm` // Example video path
+            }));
 
-        if (selectedValue) {
-          this.renavigateToSearch("", selectedValue, this.searchMode); // Call a method to load search results for the tag
-        }
-
-        // Parse the data and include VideoUrl for each video
-        this.videos = JSON.parse(data).map((video: any) => ({
-          VideoId: video.VideoId,
-          VideoName: video.VideoName,
-          // VideoUrl: `assets/videos/${video.VideoId}.webm` // Example video path
-        }));
-
-        console.log("Videos", this.videos);
-
-        // Generate thumbnails for the videos
-        this.generateThumbnails();
-      });
+            // Generate thumbnails for the videos
+            this.generateThumbnails();
+          }
+        });
+      }
     }
   }
 
@@ -105,21 +111,30 @@ export class SearchComponent {
         this.webApiService.GetMultipleByTag(selectedValue).subscribe((data: any) => {
 
         if (selectedValue) {
+          console.log(`SearchMode: ${this.searchMode}`);
+
           this.renavigateToSearch(selectedValue, "", this.searchMode); // Call a method to load search results for the tag
         }
 
-        // Parse the data and include VideoUrl for each video
-        this.videos = JSON.parse(data).map((video: any) => ({
-          VideoId: video.VideoId,
-          VideoName: video.VideoName,
-          // VideoUrl: `assets/videos/${video.VideoId}.webm` // Example video path
-        }));
-  
-        console.log("Videos", this.videos);
+        if (data === null || data === "") {
+          // console.log("No data returned for the selected tag:", selectedValue);
+          this.videos = []; // Clear the videos array if no data is returned
+        }
+        else {
+          // Parse the data and include VideoUrl for each video
+          this.videos = JSON.parse(data).map((video: any) => ({
+            VideoId: video.VideoId,
+            VideoName: video.VideoName,
+            // VideoUrl: `assets/videos/${video.VideoId}.webm` // Example video path
+          }));
 
-        // Generate thumbnails for the videos
-        this.generateThumbnails();
+          // Generate thumbnails for the videos
+          this.generateThumbnails();
+        }
       });
+    }
+    else {
+      this.videos = []; // Clear the videos array if no data is returned
     }
   }
 
