@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class WebApiService
 {
     constructor(private http: HttpClient) {
-        console.log('HttpClient is working!');
+        // console.log('HttpClient is working!');
     }
 
     GetAllDistinctTags() {

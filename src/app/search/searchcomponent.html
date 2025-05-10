@@ -34,7 +34,7 @@
       <ul>
         <li *ngFor="let video of videos">
           <button (click)="onVideoSelect(video.VideoId)" class="video-result-button">
-            <img [src]="video.ThumbnailUrl" alt="Video Thumbnail" class="video-thumbnail" />
+            <img [src]="video.ThumbnailUrl" alt="Video Thumbnail" class="video-thumbnail" loading="lazy" />
             <span>{{ video.VideoId }} - {{ video.VideoName }}</span>
           </button>
         </li>
