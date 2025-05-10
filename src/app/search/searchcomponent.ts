@@ -111,13 +111,10 @@ export class SearchComponent {
         this.webApiService.GetMultipleByTag(selectedValue).subscribe((data: any) => {
 
         if (selectedValue) {
-          console.log(`SearchMode: ${this.searchMode}`);
-
           this.renavigateToSearch(selectedValue, "", this.searchMode); // Call a method to load search results for the tag
         }
 
         if (data === null || data === "") {
-          // console.log("No data returned for the selected tag:", selectedValue);
           this.videos = []; // Clear the videos array if no data is returned
         }
         else {
@@ -135,6 +132,10 @@ export class SearchComponent {
     }
     else {
       this.videos = []; // Clear the videos array if no data is returned
+
+      if (selectedValue) {
+        this.renavigateToSearch(selectedValue, "", this.searchMode); // Call a method to load search results for the tag
+      }
     }
   }
 
@@ -153,8 +154,9 @@ export class SearchComponent {
   onVideoSelect(videoId: number) {
     const videoIds = this.videos.map(video => video.VideoId);
     
-    this.router.navigate(['/watch-video', videoId], {
-      queryParams: { videoIds: JSON.stringify(videoIds) }
+    this.router.navigate(['/watch-video'], {
+      replaceUrl: false,
+      queryParams: { videoId: videoId, videoIds: JSON.stringify(videoIds) }
     });
   }
 
@@ -164,8 +166,6 @@ export class SearchComponent {
     const context = canvasElement.getContext('2d');
   
     this.videos.forEach((video, index) => {
-      console.log("Generating thumbnail for video:", video.VideoId);
-
       const videoElement = document.createElement('video');
       videoElement.src = "assets/videos/"+video.VideoId+".webm";
   
@@ -178,16 +178,11 @@ export class SearchComponent {
         videoElement.currentTime = 2;
   
         videoElement.onseeked = () => {
-          console.log("Seeking to 2 seconds for video:", video.VideoId);
-
           // Draw the current frame of the video onto the canvas
           context?.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
   
           // Convert the canvas content to a data URL (base64 image)
           video.ThumbnailUrl = canvasElement.toDataURL('image/jpeg');
-  
-          // Trigger change detection if needed
-          // console.log(`Generated thumbnail for video ${video.VideoId}`);
         };
       };
     });

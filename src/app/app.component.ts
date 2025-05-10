@@ -21,7 +21,10 @@ export class AppComponent {
   goToRandomVideo(){
       var randomIndex = this.getRandomInt()
 
-      this.router.navigate(['/watch-video', randomIndex]);  
+      this.router.navigate(['/watch-video'], {
+        replaceUrl: false,
+        queryParams: { videoId: randomIndex }
+      });
   }
 
   goToSearch() {

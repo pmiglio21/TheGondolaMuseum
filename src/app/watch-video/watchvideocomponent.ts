@@ -42,12 +42,19 @@ export class WatchVideoComponent {
   videoIdsInCollection: number[] = [];
 
   ngOnInit() {
-      this.activatedRoute.params.subscribe((params: Params) => this.videoId = params['id']);
+      this.activatedRoute.queryParams.subscribe(queryParams => {
+        if (queryParams['videoId']) {
+          this.videoId = queryParams['videoId'];
+        }
+        else
+        {
+          this.videoId = 1;
+        }
+      });
 
       this.activatedRoute.queryParams.subscribe(queryParams => {
         if (queryParams['videoIds']) {
           this.videoIdsInCollection = JSON.parse(queryParams['videoIds']);
-          console.log('Video IDs:', this.videoIdsInCollection);
         }
       });
 
@@ -89,8 +96,6 @@ export class WatchVideoComponent {
         {
           this.gondolaNotFoundDescription = "??? CAN'T FIND GONDOLA IN VIDEO ???"
         }
-
-        // console.log(this.originalFileName)
       });
   }
 
@@ -122,12 +127,11 @@ export class WatchVideoComponent {
   }
   
   goToSimilarVideo(similarVideoId: number) {
-    this.router.navigate(['/watch-video', similarVideoId]);
-    
     this.similarVideos?.push(this.videoId);
 
-    this.router.navigate(['/watch-video', similarVideoId], {
-      queryParams: { videoIds: JSON.stringify(this.similarVideos) }
+    this.router.navigate(['/watch-video'], {
+      replaceUrl: false,
+      queryParams: { videoId: similarVideoId, videoIds: JSON.stringify(this.similarVideos) }
     });
   }
 
@@ -135,7 +139,12 @@ export class WatchVideoComponent {
     if (!this.videoIdsInCollection || this.videoIdsInCollection.length === 0) {
       // If videoIdsInCollection is empty, decrement videoId or loop back to 1875
       const previousVideoId = this.videoId === 1 ? 1875 : this.videoId - 1;
-      this.router.navigate(['/watch-video', previousVideoId]);
+
+      this.router.navigate(['/watch-video'], {
+        replaceUrl: false,
+        queryParams: { videoId: previousVideoId }
+      });
+
     } else {
       const currentIndex = this.videoIdsInCollection.indexOf(this.videoId);
   
@@ -143,14 +152,18 @@ export class WatchVideoComponent {
       if (currentIndex > 0) {
         // Navigate to the previous video in the collection
         const previousVideoId = this.videoIdsInCollection[currentIndex - 1];
-        this.router.navigate(['/watch-video', previousVideoId], {
-          queryParams: { videoIds: JSON.stringify(this.videoIdsInCollection) }
+
+        this.router.navigate(['/watch-video'], {
+          replaceUrl: false,
+          queryParams: { videoId: previousVideoId, videoIds: JSON.stringify(this.videoIdsInCollection) }
         });
       } else {
         // If at the beginning, loop back to the last video in the collection
         const lastVideoId = this.videoIdsInCollection[this.videoIdsInCollection.length - 1];
-        this.router.navigate(['/watch-video', lastVideoId], {
-          queryParams: { videoIds: JSON.stringify(this.videoIdsInCollection) }
+
+        this.router.navigate(['/watch-video'], {
+          replaceUrl: false,
+          queryParams: { videoId: lastVideoId, videoIds: JSON.stringify(this.videoIdsInCollection) }
         });
       }
     }
@@ -160,7 +173,11 @@ export class WatchVideoComponent {
     if (!this.videoIdsInCollection || this.videoIdsInCollection.length === 0) {
       // If videoIdsInCollection is empty, increment videoId or loop back to 1
       const nextVideoId = this.videoId === 1875 ? 1 : this.videoId + 1;
-      this.router.navigate(['/watch-video', nextVideoId]);
+
+      this.router.navigate(['/watch-video'], {
+        replaceUrl: false,
+        queryParams: { videoId: nextVideoId }
+      });
     } else {
       const currentIndex = this.videoIdsInCollection.indexOf(this.videoId);
   
@@ -168,14 +185,18 @@ export class WatchVideoComponent {
       if (currentIndex < this.videoIdsInCollection.length - 1) {
         // Navigate to the next video in the collection
         const nextVideoId = this.videoIdsInCollection[currentIndex + 1];
-        this.router.navigate(['/watch-video', nextVideoId], {
-          queryParams: { videoIds: JSON.stringify(this.videoIdsInCollection) }
+        
+        this.router.navigate(['/watch-video'], {
+          replaceUrl: false,
+          queryParams: { videoId: nextVideoId, videoIds: JSON.stringify(this.videoIdsInCollection) }
         });
       } else {
         // If at the end, loop back to the first video in the collection
         const firstVideoId = this.videoIdsInCollection[0];
-        this.router.navigate(['/watch-video', firstVideoId], {
-          queryParams: { videoIds: JSON.stringify(this.videoIdsInCollection) }
+
+        this.router.navigate(['/watch-video'], {
+          replaceUrl: false,
+          queryParams: { videoId: firstVideoId, videoIds: JSON.stringify(this.videoIdsInCollection) }
         });
       }
     }
