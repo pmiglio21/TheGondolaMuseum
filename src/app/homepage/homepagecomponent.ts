@@ -62,6 +62,9 @@ export class HomePageComponent {
   }
 
   goToWatchVideo() {
-    this.router.navigate(['/watch-video', this.videoId]);
+    this.router.navigate(['/watch-video'], {
+      replaceUrl: false,
+      queryParams: { videoId: this.videoId }
+    });
   }
 }

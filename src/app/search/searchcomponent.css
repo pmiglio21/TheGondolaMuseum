@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column; /* Stack the search bar and results vertically */
   position: relative; /* Ensure the container is the positioning context */
-  width: 50%; /* Adjust the width as needed */
+  width: 80%; /* Adjust the width as needed */
   background-color: rgba(0, 0, 0, 0.5); /* Optional: Add a semi-transparent background */
   padding: 10px 20px; /* Add padding for spacing */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a shadow for better visibility */
@@ -61,7 +61,7 @@
   position: absolute; /* Position it relative to the search-container */
   top: 100%; /* Place it directly below the search-container */
   left: 0; /* Align it with the left edge of the search-container */
-  width: 100%; /* Match the width of the search-container */
+  width: 98.75%; /* Match the width of the search-container */
   background-color: rgba(0, 0, 0, 0.5); /* Optional: Add a semi-transparent background */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a shadow for better visibility */
   padding: 10px; /* Add padding inside the results container */
