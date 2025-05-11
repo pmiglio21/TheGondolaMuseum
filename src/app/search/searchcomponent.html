@@ -32,10 +32,10 @@
     
     <div class="search-results">
       <ul>
-        <li *ngFor="let video of videos">
+        <li *ngFor="let video of videos" class="video-result-line">
           <button (click)="onVideoSelect(video.VideoId)" class="video-result-button">
             <img [src]="video.ThumbnailUrl" alt="Video Thumbnail" class="video-thumbnail" loading="lazy" />
-            <span>{{ video.VideoId }} - {{ video.VideoName }}</span>
+            <span class="video-result-span">{{ video.VideoId }} - {{ video.VideoName }}</span>
           </button>
         </li>
       </ul>

@@ -11,7 +11,7 @@
   flex-direction: column; /* Stack the search bar and results vertically */
   position: relative; /* Ensure the container is the positioning context */
   width: 50%; /* Adjust the width as needed */
-  background-color: #f8f9fa; /* Light background color for visibility */
+  background-color: rgba(0, 0, 0, 0.5); /* Optional: Add a semi-transparent background */
   padding: 10px 20px; /* Add padding for spacing */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a shadow for better visibility */
   margin-left: 15%; /* Offset for the navbar */
@@ -48,9 +48,11 @@
 }
 
 .search-toggle {
+  background-color: #444;
+  color: white;
   padding: 10px;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid #444;
   border-radius: 5px;
 }
 
@@ -60,9 +62,7 @@
   top: 100%; /* Place it directly below the search-container */
   left: 0; /* Align it with the left edge of the search-container */
   width: 100%; /* Match the width of the search-container */
-  background-color: white; /* Background color for visibility */
-  border: 1px solid #ccc; /* Add a border for separation */
-  border-radius: 5px; /* Rounded corners */
+  background-color: rgba(0, 0, 0, 0.5); /* Optional: Add a semi-transparent background */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a shadow for better visibility */
   padding: 10px; /* Add padding inside the results container */
   margin-bottom: 10%; /* Add extra padding at the bottom */
@@ -86,7 +86,7 @@
   color: black;
   font-size: 1rem;
   text-align: left;
-  background-color: #f8f9fa;
+  background-color: lightgray; /* Light gray background */
   border: 1px solid #ccc;
   border-radius: 5px;
   cursor: pointer;
@@ -94,7 +94,7 @@
 }
 
 .search-results button:hover {
-  background-color: #e9ecef;
+  background-color: gray;
 }
 
 .video-result-button {
@@ -105,14 +105,12 @@
   padding: 10px;
   font-size: 1rem;
   text-align: left;
-  background-color: #f8f9fa;
-  border: 1px solid #ccc;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .video-result-button:hover {
-  background-color: #e9ecef;
+  background-color: #555;
 }
 
 .video-thumbnail {

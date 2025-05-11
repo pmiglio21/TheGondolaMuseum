@@ -42,6 +42,54 @@ html, body {
   box-sizing: border-box; /* Include padding in width calculation */
 }
 
+#box-above-video-element {
+  position: relative; /* Make this the positioning context */
+  display: flex; /* Use Flexbox to align items horizontally */
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
+  width: 1280px ; /* Make the header span the full width */
+  padding: 10px; /* Add padding for spacing */
+  background-color: rgba(0, 0, 0, 0.5); /* Optional: Add a semi-transparent background */
+  color: white; /* Text color */
+  border-radius: 5px; /* Optional: Add rounded corners */
+  z-index: 10; /* Ensure it appears above other elements */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+#left-button {
+  position: absolute; /* Position the button relative to the container */
+  left: 10px; /* Move it to the far left with some spacing */
+  background-color: #444; /* Button background color */
+  color: white; /* Button text color */
+  border: none; /* Remove default border */
+  padding: 10px 20px; /* Add padding for better appearance */
+  font-size: 1rem; /* Adjust font size */
+  cursor: pointer; /* Change cursor to pointer */
+  border-radius: 5px; /* Add rounded corners */
+  z-index: 20; /* Ensure it appears above other elements */
+}
+
+#left-button:hover {
+  background-color: #555; /* Darken button on hover */
+}
+
+#right-button {
+  position: absolute; /* Position the button relative to the container */
+  right: 10px; /* Move it to the far left with some spacing */
+  background-color: #444; /* Button background color */
+  color: white; /* Button text color */
+  border: none; /* Remove default border */
+  padding: 10px 20px; /* Add padding for better appearance */
+  font-size: 1rem; /* Adjust font size */
+  cursor: pointer; /* Change cursor to pointer */
+  border-radius: 5px; /* Add rounded corners */
+  z-index: 20; /* Ensure it appears above other elements */
+}
+
+#right-button:hover {
+  background-color: #555; /* Darken button on hover */
+}
+
 #video-header button {
   margin-right: 10px; /* Add spacing between the button and the video ID display */
   padding: 10px 20px; /* Add padding to the button */
@@ -64,6 +112,7 @@ html, body {
 
 /* Style the video container */
 #video-display {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -71,8 +120,12 @@ html, body {
   top: 100%;
   width: 100%; /* Ensure the video container takes full width */
   max-height: 90%; /* Prevent it from exceeding the parent container */
-  padding-top: 20px;
   overflow: hidden; /* Prevent scrolling within the video container */
+}
+
+#video-element {
+  margin-top: 20px;
+  background-color: black;
 }
 
 .detail-navbar {
