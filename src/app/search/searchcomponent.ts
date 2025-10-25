@@ -103,6 +103,8 @@ export class SearchComponent {
         });
       }
     }
+
+    this.resetPagination();
   }
 
   onSearchBarValueSelected(selectedValue: string) {
@@ -137,6 +139,7 @@ export class SearchComponent {
         this.renavigateToSearch(selectedValue, "", this.searchMode); // Call a method to load search results for the tag
       }
     }
+    this.resetPagination();
   }
 
   renavigateToSearch(tag: string, source: string, searchMode: string) {
@@ -186,5 +189,34 @@ export class SearchComponent {
         };
       };
     });
+  }
+
+   pageSize = 20;
+  currentPage = 1;
+
+  get totalPages(): number {
+    return Math.max(1, Math.ceil(this.videos.length / this.pageSize));
+  }
+
+  get pagedVideos() {
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.videos.slice(start, start + this.pageSize);
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) this.currentPage++;
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) this.currentPage--;
+  }
+
+  goToPage(n: number) {
+    if (n >= 1 && n <= this.totalPages) this.currentPage = n;
+  }
+
+  // call this when your videos array is replaced/updated (e.g. after a search)
+  resetPagination() {
+    this.currentPage = 1;
   }
 }

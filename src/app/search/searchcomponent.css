@@ -58,16 +58,17 @@
 
 /* Style the search results */
 .search-results {
-  position: absolute; /* Position it relative to the search-container */
-  top: 100%; /* Place it directly below the search-container */
-  left: 0; /* Align it with the left edge of the search-container */
-  width: 98.75%; /* Match the width of the search-container */
-  background-color: rgba(0, 0, 0, 0.5); /* Optional: Add a semi-transparent background */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a shadow for better visibility */
-  padding: 10px; /* Add padding inside the results container */
-  margin-bottom: 10%; /* Add extra padding at the bottom */
-  overflow-y: auto; /* Allow scrolling if results overflow */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 98.75%;
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  margin-bottom: 10%;
+  overflow-y: auto;
   margin-top: 20px;
+  padding-bottom: 60px; /* space for pagination buttons */
 }
 
 .search-results ul {
@@ -119,4 +120,66 @@
   object-fit: cover; /* Ensure the thumbnail is cropped properly */
   border-radius: 5px; /* Optional: Add rounded corners */
   margin-right: 10px; /* Add spacing between the thumbnail and text */
+}
+
+.pagination {
+    position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  height: 44px;              /* reserve vertical space for centered text */
+  pointer-events: auto;
+  z-index: 30;
+
+  display: flex;             /* center the page-info */
+  align-items: center;
+  justify-content: center;
+  padding: 0 56px;           /* leave space at edges so text doesn't overlap buttons */
+  box-sizing: border-box;
+}
+
+/* small square buttons anchored to left / right edges */
+.pagination .prev-btn,
+.pagination .next-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 80px;
+  height: 36px;
+  padding: 4px;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  z-index: 31;
+}
+
+.pagination .prev-btn {
+  left: 8px;   /* anchor to left edge of search-results */
+}
+
+.pagination .next-btn {
+  right: 8px;  /* anchor to right edge of search-results */
+}
+
+.pagination .prev-btn[disabled],
+.pagination .next-btn[disabled] {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* centered page text */
+.pagination .page-info {
+  margin: 0;
+  color: white;
+  font-weight: 500;
+  line-height: 44px; /* vertically center inside .pagination */
+  text-align: center;
+  pointer-events: none;
+  z-index: 32;       /* ensure it sits above background but below buttons if needed */
 }
