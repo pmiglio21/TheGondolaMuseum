@@ -68,7 +68,8 @@
   margin-bottom: 10%;
   overflow-y: auto;
   margin-top: 20px;
-  padding-bottom: 60px; /* space for pagination buttons */
+  padding-bottom: 60px; /* space for bottom pagination buttons */
+  padding-top: 60px;    /* reserve space for top pagination buttons */
 }
 
 .search-results ul {
@@ -122,25 +123,25 @@
   margin-right: 10px; /* Add spacing between the thumbnail and text */
 }
 
-.pagination {
-    position: absolute;
+/* Top pagination (same behavior as pagination-bottom but anchored to top) */
+.pagination-top {
+  position: absolute;
   left: 0;
   right: 0;
-  bottom: 10px;
-  height: 44px;              /* reserve vertical space for centered text */
+  top: 10px;
+  height: 44px;
   pointer-events: auto;
   z-index: 30;
 
-  display: flex;             /* center the page-info */
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 56px;           /* leave space at edges so text doesn't overlap buttons */
+  padding: 0 56px;
   box-sizing: border-box;
 }
 
-/* small square buttons anchored to left / right edges */
-.pagination .prev-btn,
-.pagination .next-btn {
+.pagination-top .prev-btn,
+.pagination-top .next-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -159,22 +160,83 @@
   z-index: 31;
 }
 
-.pagination .prev-btn {
+.pagination-top .prev-btn {
+  left: 8px;
+}
+
+.pagination-top .next-btn {
+  right: 8px;
+}
+
+.pagination-top .prev-btn[disabled],
+.pagination-top .next-btn[disabled] {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.pagination-top .page-info {
+  margin: 0;
+  color: white;
+  font-weight: 500;
+  line-height: 44px;
+  text-align: center;
+  pointer-events: none;
+  z-index: 32;
+}
+
+.pagination-bottom {
+    position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  height: 44px;              /* reserve vertical space for centered text */
+  pointer-events: auto;
+  z-index: 30;
+
+  display: flex;             /* center the page-info */
+  align-items: center;
+  justify-content: center;
+  padding: 0 56px;           /* leave space at edges so text doesn't overlap buttons */
+  box-sizing: border-box;
+}
+
+/* small square buttons anchored to left / right edges */
+.pagination-bottom .prev-btn,
+.pagination-bottom .next-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 80px;
+  height: 36px;
+  padding: 4px;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  z-index: 31;
+}
+
+.pagination-bottom .prev-btn {
   left: 8px;   /* anchor to left edge of search-results */
 }
 
-.pagination .next-btn {
+.pagination-bottom .next-btn {
   right: 8px;  /* anchor to right edge of search-results */
 }
 
-.pagination .prev-btn[disabled],
-.pagination .next-btn[disabled] {
+.pagination-bottom .prev-btn[disabled],
+.pagination-bottom .next-btn[disabled] {
   opacity: 0.5;
   cursor: default;
 }
 
 /* centered page text */
-.pagination .page-info {
+.pagination-bottom .page-info {
   margin: 0;
   color: white;
   font-weight: 500;

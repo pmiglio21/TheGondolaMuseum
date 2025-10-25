@@ -31,6 +31,12 @@
     </div>
     
     <div class="search-results">
+      <div class="pagination-top">
+        <button class="prev-btn" (click)="prevPage()" [disabled]="currentPage === 1">Prev</button>
+        <span class="page-info">Page {{ currentPage }} / {{ totalPages }}</span>
+        <button class="next-btn" (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+      </div>
+
       <ul>
         <li *ngFor="let video of pagedVideos" class="video-result-line">
           <button (click)="onVideoSelect(video.VideoId)" class="video-result-button">
@@ -40,7 +46,7 @@
         </li>
       </ul>
 
-      <div class="pagination">
+      <div class="pagination-bottom">
         <button class="prev-btn" (click)="prevPage()" [disabled]="currentPage === 1">Prev</button>
         <span class="page-info">Page {{ currentPage }} / {{ totalPages }}</span>
         <button class="next-btn" (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
